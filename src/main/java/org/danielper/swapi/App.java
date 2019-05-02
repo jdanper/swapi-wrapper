@@ -15,7 +15,7 @@ public class App {
 
         vertx.deployVerticle(new RepositoryVerticle(), res -> {
             if (res.succeeded()) {
-                log.info("database connected");
+                log.info("Database connected");
             }else{
                 log.fatal(res.cause().getMessage());
                 System.exit(-1);

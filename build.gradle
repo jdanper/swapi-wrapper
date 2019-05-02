@@ -17,6 +17,12 @@ dependencies {
     // Vertx
     compile group: 'io.vertx', name: 'vertx-core', version: '3.7.0'
     compile group: 'io.vertx', name: 'vertx-web', version: '3.7.0'
+    
+    // HttpClient
+    compile 'io.vertx:vertx-web-client:3.7.0'
+
+    // CircuitBreaker
+    compile 'io.vertx:vertx-circuit-breaker:3.7.0'
 
     // Log4j
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.1'
