@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.danielper.swapi.module.HttpVerticle;
 import org.danielper.swapi.module.PlanetVerticle;
 import org.danielper.swapi.module.RepositoryVerticle;
+import org.danielper.swapi.module.SwapiVerticle;
 
 public class App {
     private static final Logger log = LogManager.getLogger(App.class);
@@ -16,6 +17,15 @@ public class App {
         vertx.deployVerticle(new RepositoryVerticle(), res -> {
             if (res.succeeded()) {
                 log.info("Database connected");
+            }else{
+                log.fatal(res.cause().getMessage());
+                System.exit(-1);
+            }
+        });
+
+        vertx.deployVerticle(new SwapiVerticle(), res -> {
+            if (res.succeeded()) {
+                log.info("Remove api consumer started");
             }else{
                 log.fatal(res.cause().getMessage());
                 System.exit(-1);

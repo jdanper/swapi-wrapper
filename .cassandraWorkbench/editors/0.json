@@ -1,0 +1,1 @@
+{"body":"  SELECT id, name, climate, film_count, terrain\n  FROM planets.planet\n  LIMIT 500;","clusterName":"Cluster PasswordAuthenticator","filename":"script_8.cql","id":"6vHLnlVETyh2w8dm","keyspace":"planets","modified":true,"source":"action"}

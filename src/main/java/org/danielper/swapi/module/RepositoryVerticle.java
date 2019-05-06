@@ -8,6 +8,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.danielper.swapi.database.PlanetsDb;
+import org.danielper.swapi.util.BusAddresses;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -21,7 +23,7 @@ public class RepositoryVerticle extends AbstractVerticle {
             .put("name", row.getString("name"))
             .put("climate", row.getString("climate"))
             .put("terrain", row.getString("terrain"))
-            .put("movies", row.getInt("movie_count"));
+            .put("film_count", row.getInt("film_count"));
 
     @Override
     public void start(Future<Void> startFuture) {
@@ -30,8 +32,8 @@ public class RepositoryVerticle extends AbstractVerticle {
 
             db = new PlanetsDb();
 
-            bus.consumer(MessageTypes.QUERY_ALL_PLANETS, this::getAll);
-            bus.consumer(MessageTypes.INSERT_PLANET, this::insert);
+            bus.consumer(BusAddresses.QUERY_ALL_PLANETS, this::getAll);
+            bus.consumer(BusAddresses.INSERT_PLANET, this::insert);
 
             startFuture.complete();
         } catch (Exception ex) {

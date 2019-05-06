@@ -1,0 +1,9 @@
+{
+    "cassandraWorkbench.activeClusterName": "Cluster PasswordAuthenticator",
+    "cassandraWorkbench.activeKeyspace": [
+        [
+            "Cluster PasswordAuthenticator",
+            "planets"
+        ]
+    ]
+}

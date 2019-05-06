@@ -3,12 +3,17 @@ package org.danielper.swapi.util;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.eventbus.ReplyException;
-import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
+import java.util.Optional;
+
 public class Http {
-    public static void fail(final RoutingContext ctx, final int statusCode, final Throwable error) {
+    private static void end(final RoutingContext ctx, final int statusCode, final JsonObject data) {
+        ctx.response().setStatusCode(statusCode).end(data.encode());
+    }
+
+    private static void fail(final RoutingContext ctx, final int statusCode, final Throwable error) {
         final var failureResponse = new JsonObject().put("message", error.getMessage());
 
         end(ctx, statusCode, failureResponse);
@@ -27,7 +32,7 @@ public class Http {
         end(ctx, 200, responseJson);
     }
 
-    public static void end(final RoutingContext ctx, final int statusCode, final JsonObject data) {
-        ctx.response().setStatusCode(statusCode).end(data.encode());
+    public static Optional<String> getQueryStr(final RoutingContext ctx, final String queryStr) {
+        return ctx.queryParam(queryStr).stream().findFirst();
     }
 }

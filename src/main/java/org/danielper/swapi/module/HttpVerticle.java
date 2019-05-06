@@ -8,6 +8,10 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.danielper.swapi.util.BusAddresses;
+
+import static org.danielper.swapi.util.Http.getQueryStr;
+import static org.danielper.swapi.util.Http.handleMsgResult;
 
 public class HttpVerticle extends AbstractVerticle {
     private final Logger log = LogManager.getLogger(HttpVerticle.class);
@@ -38,6 +42,8 @@ public class HttpVerticle extends AbstractVerticle {
         router.get("/planets").handler(this::planetsHandler);
         router.post("/planets").handler(this::newPlanet);
 
+        router.get("/planets/swapi").handler(this::getPlanetsFromSwapi);
+
         return router;
     }
 
@@ -47,10 +53,14 @@ public class HttpVerticle extends AbstractVerticle {
     }
 
     private void planetsHandler(RoutingContext ctx){
-        bus.send(MessageTypes.GET_ALL_PLANETS, null, res -> handleMsgResult(ctx, res));
+        bus.send(BusAddresses.GET_ALL_PLANETS, null, res -> handleMsgResult(ctx, res));
     }
 
     private void newPlanet(RoutingContext ctx){
-        bus.send(MessageTypes.NEW_PLANET, ctx.getBodyAsJson(), res -> handleMsgResult(ctx, res));
+        bus.send(BusAddresses.NEW_PLANET, ctx.getBodyAsJson(), res -> handleMsgResult(ctx, res));
+    }
+
+    private void getPlanetsFromSwapi(RoutingContext ctx) {
+        bus.send(BusAddresses.GET_PLANETS_SWAPI, getQueryStr(ctx, "page").orElse("1"), res -> handleMsgResult(ctx, res));
     }
 }
