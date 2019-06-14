@@ -23,3 +23,15 @@
 hs_err_pid*
 
 .idea/
+
+.project
+
+.classpath
+
+.settings
+
+.vscode
+
+bin
+
+build

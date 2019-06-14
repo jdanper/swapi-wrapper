@@ -1,1 +1,0 @@
-{"body":"-- change column name\nALTER TABLE planets.planet add film_count int;","clusterName":"Cluster PasswordAuthenticator","filename":"script_4.cql","id":"4cV2kTYnZjBGwFH0","keyspace":"planets","modified":true,"source":"action"}
