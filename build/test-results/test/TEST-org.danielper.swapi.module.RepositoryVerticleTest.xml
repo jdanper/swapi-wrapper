@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.danielper.swapi.module.RepositoryVerticleTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-04-30T00:22:29" hostname="ub" time="0.008">
-  <properties/>
-  <testcase name="test" classname="org.danielper.swapi.module.RepositoryVerticleTest" time="0.008"/>
-  <system-out><![CDATA[gniht
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
